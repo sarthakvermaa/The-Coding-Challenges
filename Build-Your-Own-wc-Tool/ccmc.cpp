@@ -90,6 +90,41 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    else if (argc == 2){
+        if(access(argv[1], F_OK) == -1){
+            printf("Error: file does not exist\n");
+            return 2;
+        }
+        else {
+            string filename = argv[1];
+
+            ifstream file(filename);
+
+            if (file.is_open()) {
+                // Initialize counters
+                int line_count = 0;
+                int word_count = 0;
+                streamsize byte_count = 0;
+                string line;
+
+                while (getline(file, line)) {
+                    line_count++; 
+                    byte_count += line.size() + 1; 
+
+                    // Count words in the current line
+                    stringstream ss(line);
+                    string word;
+                    while (ss >> word) {
+                        word_count++; 
+                    }
+                }
+
+                cout << line_count << " " << word_count << " " << byte_count << " " << filename << endl;
+                file.close();
+            }   
+        }
+    }
+
     else {
         cout << "Use the correct commands" << endl;
         return 1;
