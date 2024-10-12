@@ -69,6 +69,27 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    else if (argc == 3 && string(argv[1]) == "-m"){
+        string filename = argv[2];
+
+        ifstream file(filename, ios::binary);
+        
+        if (file.is_open()) {
+            // Seek to the end of the file to find its size
+            file.seekg(0, ios::end);
+
+            // Get the current position (which is the size of the file in bytes)
+            streampos size = file.tellg();
+            
+            cout << size << " " << filename << endl;
+            file.close();
+
+        } else {
+            cout << "Unable to open the file: " << filename << endl;
+            return 1;
+        }
+    }
+
     else {
         cout << "Use the correct commands" << endl;
         return 1;
@@ -79,5 +100,5 @@ int main(int argc, char *argv[]) {
 
 /*
     cp ccmc ~/bin
-    sudo cp ccmc /usr/bin
+    sudo cp ccmc /bin
 */
