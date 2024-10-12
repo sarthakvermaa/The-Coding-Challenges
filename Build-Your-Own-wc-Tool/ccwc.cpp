@@ -134,6 +134,6 @@ int main(int argc, char *argv[]) {
 }
 
 /*
-    cp ccmc ~/bin
-    sudo cp ccmc /bin
+    cp ccwc ~/bin
+    sudo cp ccwc /bin
 */
