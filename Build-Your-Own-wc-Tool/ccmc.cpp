@@ -42,6 +42,33 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    else if (argc == 3 && string(argv[1]) == "-w"){
+        string filename = argv[2];
+
+        // Open the file in text mode
+        ifstream file(filename);
+
+        if (file.is_open()) {
+            string line;
+            int wordCount = 0;
+
+            while (getline(file, line)) {
+                stringstream ss(line);  // Create a stringstream object with the current line content
+                string word;
+
+                while (ss >> word) {  // Extract words from the stringstream
+                    wordCount++;  // Increment word count for each word extracted
+                }
+            }
+
+            cout << wordCount << " " << filename << endl;
+            file.close();
+        } else {
+            cout << "Unable to open the file: " << filename << endl;
+            return 1;
+        }
+    }
+
     else {
         cout << "Use the correct commands" << endl;
         return 1;
@@ -49,3 +76,8 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+/*
+    cp ccmc ~/bin
+    sudo cp ccmc /usr/bin
+*/
